@@ -20,6 +20,7 @@ public class GelinkteLijst {
 	
 	
 	public GelinkteLijst() {
+		size = 0;
 	}
 	
 	
@@ -29,35 +30,91 @@ public class GelinkteLijst {
 	
 	
 	Object getLast() {
-		return null; // dummy
+		Node i = head;
+		while(i.next != null) { i = i.next; } 
+		return i.data;
 	}	
 	
 	/**
 	 * Voeg toe aan de voorkant
 	 */
-	void insertFirst(Object o) {}
+	void insertFirst(Object o) {
+		Node insertNode = new Node();
+		insertNode.data = o;
+		
+		if (head != null) {
+			insertNode.next = head;
+		}
+		
+		head = insertNode;
+		size++;
+	}
 
 	/**
 	 * Voeg toe aan de achterkant
 	 */
-	void insertLast(Object o) {}
+	void insertLast(Object o) {
+		Node insertNode = new Node();
+		insertNode.data = o;
+		
+		Node i = head;
+		while(i.next != null) { i = i.next; }
+		
+		i.next = insertNode;
+		
+		size++;
+	}
 	
 	/**
 	 * Voeg toe voor een ander element
 	 */
-	void insertBefore(Object o, Object before) {}
+	void insertBefore(Object o, Object before) {
+		Node insertNode = new Node();
+		insertNode.data = o;
+		
+		Node i = head;
+		while(i.next != null) {
+			
+			if (i.next.equals(before)) {
+				insertNode.next = i.next;
+				i.next = insertNode;
+				size++;
+				break;
+			}
+			i = i.next;
+		}
+	}
 	
 	/**
 	 * Voeg toe na een ander element
 	 */
-	void insertAfter(Object o, Object after) {}
+	void insertAfter(Object o, Object after) {
+		Node insertNode = new Node();
+		insertNode.data = o;
+		
+		Node i = head;
+		while(i.next != null) {
+			
+			if (i.equals(after)) {
+				insertNode.next = i.next;
+				i.next = insertNode;
+				size++;
+				break;
+			}
+			i = i.next;
+		}
+	}
 
 	
 	/**
 	 * Verwijder een element
 	 * @param data
 	 */
-	void remove(Object data) {}
+	void remove(Object data) {
+		Node i = head;
+		while (!i.next.data.equals(data)) { i = i.next; }
+		i.next = i.next.next;
+	}
 	
 	/**
 	 * 
